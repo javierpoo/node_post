@@ -1,5 +1,6 @@
 const http = require('http');
 const { parse } = require('querystring');
+const util = require('util')
 
 var express = require('express')
 
@@ -11,11 +12,14 @@ app.use(express.urlencoded({ extended: true })) // for parsing application/x-www
 app.post('/', function (req, res, next) {
     if (req.method === 'POST') {
 
-        console.log("req=" + req);
+        console.log("========*======== req=" + req);
+console.log(util.inspect(req, false, null, true /* enable colors */))
 
-        console.log("req.body=" + req.body);
-        console.log("req.params=" + req.params);
-  
+        console.log("========*======== req.body=" + req.body);
+  console.log(util.inspect(req.body, false, null, true /* enable colors */))
+      console.log("========*======== req.params=" + req.params);
+  console.log(util.inspect(req.params, false, null, true /* enable colors */))
+
         
         res.send("ok");
     } 
