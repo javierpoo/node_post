@@ -4,7 +4,9 @@ const { parse } = require('querystring');
 const server = http.createServer((req, res) => {
     if (req.method === 'POST') {
 
-       console.log("req.body=" + req.body);
+        console.log("req=" + req);
+
+        console.log("req.body=" + req.body);
         
     } 
     else {
