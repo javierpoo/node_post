@@ -1,13 +1,23 @@
 const http = require('http');
 const { parse } = require('querystring');
 
-const server = http.createServer((req, res) => {
+var express = require('express')
+
+var app = express()
+
+app.use(express.json()) // for parsing application/json
+app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+
+app.post('/', function (req, res, next) {
     if (req.method === 'POST') {
 
         console.log("req=" + req);
 
         console.log("req.body=" + req.body);
+        console.log("req.params=" + req.params);
+  
         
+        res.send("ok");
     } 
     else {
         res.end(`
@@ -27,6 +37,6 @@ const server = http.createServer((req, res) => {
 });
 
 
-server.listen(process.env.PORT || 5000);
+app.listen(process.env.PORT || 5000);
 
 
