@@ -3,10 +3,9 @@ const { parse } = require('querystring');
 
 const server = http.createServer((req, res) => {
     if (req.method === 'POST') {
-        collectRequestData(req, result => {
-            console.log(result);
-            res.end(`Parsed data belonging to ${result.fname}`);
-        });
+
+       console.log("req.body=" + req.body)
+        
     } 
     else {
         res.end(`
@@ -26,18 +25,4 @@ const server = http.createServer((req, res) => {
 });
 server.listen(process.env.PORT || 5000);
 
-function collectRequestData(request, callback) {
-    const FORM_URLENCODED = 'application/x-www-form-urlencoded';
-    if(request.headers['content-type'] === FORM_URLENCODED) {
-        let body = '';
-        request.on('data', chunk => {
-            body += chunk.toString();
-        });
-        request.on('end', () => {
-            callback(parse(body));
-        });
-    }
-    else {
-        callback(null);
-    }
 }
